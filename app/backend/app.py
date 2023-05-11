@@ -4,7 +4,7 @@ import time
 import logging
 import openai
 from flask import Flask, request, jsonify
-from azure.identity import DefaultAzureCredential, AzureKeyCredential
+from azure.identity import DefaultAzureCredential #, AzureKeyCredential
 from azure.search.documents import SearchClient
 from approaches.retrievethenread import RetrieveThenReadApproach
 from approaches.readretrieveread import ReadRetrieveReadApproach
@@ -21,8 +21,8 @@ AZURE_OPENAI_SERVICE = os.environ.get("AZURE_OPENAI_SERVICE") or "openai-test-ad
 #AZURE_OPENAI_GPT_DEPLOYMENT = os.environ.get("AZURE_OPENAI_GPT_DEPLOYMENT") or "davinci"
 #AZURE_OPENAI_CHATGPT_DEPLOYMENT = os.environ.get("AZURE_OPENAI_CHATGPT_DEPLOYMENT") or "chat"
 
-AZURE_OPENAI_GPT_DEPLOYMENT = os.environ.get("AZURE_OPENAI_GPT_DEPLOYMENT") or "text-davinci-003"
-AZURE_OPENAI_CHATGPT_DEPLOYMENT = os.environ.get("AZURE_OPENAI_CHATGPT_DEPLOYMENT") or "gpt-35-turbo"
+AZURE_OPENAI_GPT_DEPLOYMENT =  "text-davinci-003"
+AZURE_OPENAI_CHATGPT_DEPLOYMENT = "gpt-35-turbo"
 
 KB_FIELDS_CONTENT = os.environ.get("KB_FIELDS_CONTENT") or "content"
 KB_FIELDS_CATEGORY = os.environ.get("KB_FIELDS_CATEGORY") or "category"
@@ -38,7 +38,7 @@ azure_credential = DefaultAzureCredential()
 # Used by the OpenAI SDK
 openai.api_type = "azure"
 #openai.api_base = f"https://{AZURE_OPENAI_SERVICE}.openai.azure.com"
-openai.api_base = f"https://dbopenai.openai.azure.com/"
+openai.api_base = f"https://dbopenai.openai.azure.com"
 openai.api_version = "2022-12-01"
 
 # Comment these two lines out if using keys, set your API key in the OPENAI_API_KEY environment variable instead
